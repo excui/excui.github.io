@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Esther Cui's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Assignment 1: Blink!</h1>
+    <h3>January 11, 2024</h3>
+    <br>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Schematic</h3>
+      <figure>
+        <img src="a1-schematic.jpg" />
+        <figcaption>
+          This is the schematic for the created blinking LED circuit. The circuit uses 3 different pins with 3 LED bulbs,
+          each using a 220 ohm resistor.
+        </figcaption>
+        <figcaption>
+          A 220 ohm resistor is used as it ensures that the current flowing through each of the bulbs remain lower than
+          a 20 mA current limit. The following calculations below showcase how much current is flowing through each LED with a 
+          220 ohm resistor:
+        </figcaption>
+        <figcaption>
+          Green and Yellow LED:
+          <pre>5V - 1.8V = 3.2 V</pre>
+          <pre>3.2V / 220 &#937 = <u>0.0145 A or 14.5 mA</u></pre>
+        </figcaption>
+        <figcaption>
+          White LED:
+          <pre>5V - 3.3V = 1.7 V</pre>
+          <pre>1.7V / 220 &#937 = <u>0.007 A or 7 mA</u></pre>
+        </figcaption>
+      </figure>
+    </div>
+    <br>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Image</h3>
+      <figure>
+        <img src="a1-circuit.jpg" />
+        <figcaption>
+          This the circuit from the previous schematic built out on Arduino.
+        </figcaption>
+      </figure>
+    </div>
+    <hr>
+
+    <div class="a1-code">
+      <h3>Firmware (Code)</h3>
+      <pre>
+        <code>
+          // setting up the following pins as outputs
+          void setup() {
+            // pin 13 is being used as an output for the first LED
+            pinMode(13, OUTPUT);
+            // pin 12 is being used as an output for second LED
+            pinMode(12, OUTPUT);
+            // pin 11 is being used as an output for the third LED
+            pinMode(11, OUTPUT);
+          }
+          
+          //loop function runs the blinking action continuously
+          void loop() {
+            // 5V is sent to pin 13 and turns on the LED light
+            digitalWrite(13, HIGH);
+            // the LED light in pin 13 stays on for 1 second
+            delay(1000);
+            // 0V is sent to pin 13 and turns off the LED light
+            digitalWrite(13, LOW);
+            // the LED light in pin 13 stays off for 1 second
+            delay(1000);
+            
+            // 5V is sent to pin 12 and turns on the LED light
+            digitalWrite(12, HIGH);
+            // the LED light in pin 12 stays on for 1 second
+            delay(1000);
+            // 0V is sent to pin 12 and turns off the LED light
+            digitalWrite(12, LOW);
+            // the LED light in pin 12 stays off for 1 second
+            delay(1000);
+            
+            // 5V is sent to pin 11 and turns on the LED light
+            digitalWrite(11, HIGH);
+            // the LED light in pin 11 stays on for 1 second
+            delay(1000);
+            // 0V is sent to pin 11 and turns off the LED light
+            digitalWrite(11, LOW);
+            // the LED light in pin 11 stays off for 1 second
+            delay(1000);
+          }          
+        </code>
+      </pre>
+    </div>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Operation</h3>
+      <figure>
+        <img src="a1-blink.gif" />
+        <figcaption>
+          This short clip shows how each LED blinks in order one at a time starting from the right to the left.
+        </figcaption>
+      </figure>
+    </div>
+    <hr>
+    <br>
+
+    <h2>Additional Questions & Responses</h2>
+    <br>
+    <div class="question">
+      <h4>
+        Question 1: Draw a graph where the X axis is time and the Y axis is voltage across the LEDs. Draw a line for each of your 3 LEDs.
+      </h4>
+      <img src="v-over-time-graph.jpg" />
+    </div>
+    <br>
+    <div class="question">
+      <h4>
+        Question 2: How many LEDs could you blink independently with your Arduino? How much current would that draw?
+      </h4>
+      <p>A total of 20 LEDs can be blinked independently. Assuming I'm using all blue LEDs and 220 &#937 resistors
+        , 20 LEDs would draw 154 mA or 0.154 A
+      </p>
+      <br>
+      <p>Calculation:</p>
+      <pre>5V - 3.3V = 1.7 V</pre>
+      <pre>1.7 V / 220 &#937 = 0.0077 A or 7.7 mA per LED</pre>
+      <pre>7.7 mA * 20 = <u>0.154 A or 154 mA total</u></pre>
+    </div>
+    <br>
+    <div class="question">
+      <h4>
+        Question 3: How fast do you need to blink your LEDs until you no longer can tell that they are blinking?
+      </h4>
+      <p>The LEDs should blink between 1 to 3 milliseconds to make it so that you can longer tell that they are blinking.</p>
+    </div>
+
+  </body>
+</html>
