@@ -120,4 +120,26 @@ h2 {
   margin-right: auto;
 }
 
+.a2 h3 {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.a2 img {
+  width: 80%;
+  object-fit: cover;
+  border:3px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.a2 figcaption{
+  font-style: italic;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
 
