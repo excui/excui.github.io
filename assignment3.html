@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Esther Cui's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Assignment 3: Input Output!</h1>
+    <h3>January 26, 2024</h3>
+    <br>
+    <hr>
+
+    <div class="a2">
+      <h3>Circuit Schematic</h3>
+      <figure>
+        <img src="a3-schematic.jpg" />
+        <figcaption>
+          This is the schematic for the created circuit using a photoresistor and a red, green, and yellow LED. Each LED uses a 220 &#937 resistor,
+           and a 10k &#937 resistor is combined with the photoresistor to create a voltage divider.
+        </figcaption>
+        <figcaption>
+          A 220 ohm resistor is used as it ensures that the current flowing through each LED remain lower than
+          a 20 mA current limit. The following calculations below showcase how much current is flowing through each LED with a 
+          220 ohm resistor:
+        </figcaption>
+        <figcaption>
+          <pre>5V - 1.8V = 3.2 V</pre>
+          <pre>3.2V / 220 &#937 = <u>0.0145 A or 14.5 mA</u></pre>
+        </figcaption>
+        <figcaption>
+          For the photoresistor, an additional 10k &#937 is used in the voltage divider to limit the amount of current going
+          through the photoresistor so that a change in resistance can be measured. The following calculations below showcase
+          what values can be read by the voltage divider using a 10k &#937 resistor:
+        </figcaption>
+        <figcaption>
+          If the photoresistor had a 5k &#937 value:
+          <pre>V(out) = [10k &#937 / (5k &#937 + 10k &#937)] * 5V</pre>
+          <pre>V(out) = (10k &#937 / 15k &#937) * 5V</pre>
+          <pre>V(out) = 3.33 V</pre>
+        </figcaption>
+        <figcaption>
+          If the photoresistor had a 2k &#937 value:
+          <pre>V(out) = [10k &#937 / (2k &#937 + 10k &#937)] * 5V</pre>
+          <pre>V(out) = (10k &#937 / 12k &#937) * 5V</pre>
+          <pre>V(out) = 4.17 V</pre>
+        </figcaption>
+      </figure>
+    </div>
+    <br>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Image</h3>
+      <figure>
+        <img src="a3-circuit.JPG" />
+        <figcaption>
+          This the circuit from the previous schematic built out on Arduino that uses one photoresistor,
+          one red LED, one green LED, and one yellow LED.
+        </figcaption>
+      </figure>
+    </div>
+    <hr>
+
+    <div class="a1-code">
+      <h3>Firmware (Code)</h3>
+      <pre>
+        <code>
+        // declare the pin value for the first LED
+        int led1 = 11;
+        // declare the pin value for the second LED
+        int led2 = 10;
+        // declare the pin value for the third LED
+        int led3 = 9;
+
+        //initially declares the value that will later change from analogRead
+        int light_sensor_val = 0;
+        // intially declares the value that will be used for the LEDs' brightness
+        int led_val = 0;
+
+        // setting up the following pins/variables and setting data rate
+        void setup() {
+          //sets data rate in baud
+          Serial.begin(9600);
+          // pin 11 (led1) is being used as an output for the first LED
+          pinMode(led1, OUTPUT);
+          // pin 10 (led2) is being used as an output for the first LED
+          pinMode(led2, OUTPUT);
+          // pin 9 (led3) is being used as an output for the first LED
+          pinMode(led3, OUTPUT);
+  
+        }
+
+        //loop function runs the blinking action continuously
+        void loop() {
+          // read the value on the analog pin
+          light_sensor_val = analogRead(0);
+          // prints the analog value from the photoresistor
+          Serial.println(light_sensor_val);
+          // if statement for the photoresistor to determine the output based on its value
+          // I found that the analog values can go as low as around 280-290 when covering
+              //the photoresistor with my hand.
+          // I also found the maximum value to be around 860.
+          // For the purposes of my circuit, I am setting the lowest possible brightness
+              //to correspond to 300 from the analog values
+          if(light_sensor_val > 300){
+            // setting the variable and mapping the value to a brightness level for the LEDs
+            // I'm setting 300 and 900 as my min and max values based on the output values received while testing
+            led_val = map(light_sensor_val, 300, 900, 1, 255);
+            // setting the brightness for the first LED (11)
+            analogWrite(led1, led_val);
+            // setting the brightness for the second LED (10)
+            analogWrite(led2, led_val);
+            // setting the brightness for the third LED (9)
+            analogWrite(led3, led_val);
+          }
+          // remaining else statement for analogRead values less than 400 and will by default not emit any light
+          else {
+            // no light is emitted from the first LED (11)
+            analogWrite(led1, 0);
+            // no light is emitted from the second LED (10)
+  	        analogWrite(led2, 0);
+            // no light is emitted from the third LED (9)
+            analogWrite(led3, 0);
+          }   
+        }   
+        </code>
+      </pre>
+    </div>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Operation</h3>
+      <figure>
+        <img src="a3-operation.gif" />
+        <figcaption>
+          This short clip shows how the the 3 LEDs turn on with light on the photoresistor and turn off when
+          the photoresistor receives little to no light.
+        </figcaption>
+      </figure>
+    </div>
+    <hr>
+    <br>
+
+    <h2>Additional Questions & Responses</h2>
+    <br>
+    <div class="question">
+      <h4>
+        Question 1: In your voltage divider, can the variable resistor be either R1 or R2 or does it need to be one or the other? Justify your answer with example calculations.
+      </h4>
+      <p>
+        The variable resistor can be either R1 or R2, though the effects on the rest of the circuit, like the LEDs in my circuit,
+        will be different. If the variable resistor is R1, then the output voltage or V(out) will decrease as the resistance increases.
+        If the variable resistor is R2, then the output voltage will increase as the resistance increases.
+      </p>
+      <p>
+        Let's apply this to my LED circuit. For the photoresistor, the resistance increases as the light becomes darker, but the resistance
+        decreases as it receives more light. Thus, if the photoresistor is R1, then the output voltage to the LEDs will increase as the
+        photoresistor receives more light. If the photoresistor is R2, then the output voltage to the LEDs will decrease as the photoresistor
+        receives more light.
+      </p>
+      <p>
+        The following calculations showcase example numerical changes based on a change in resistance amount:
+      </p>
+      <img src="a3-q2.jpg" />
+      <p>
+        Through the provided calculations, it's possible for me to create the same circuit and LED reactions if the variable resistor
+        is set to be either R1 or R2. However, the reaction to how much light is received by the photoresistor will be inversed.
+      </p>
+    </div>
+    <br>
+    <div class="question">
+      <h4>
+        Question 2: Draw a graph where the x-axis is time and the y-axis is voltage. Plot the voltage at V-measure of your voltage divider of your shared gif.
+      </h4>
+      <p>
+        I measured the voltage running across the voltage divider with my multimeter. I found that the highest voltage is around 4.10 V and
+        the voltage goes down to 0 V when the photoresistor is covered. The time is estimated based on the provided gif.
+      </p>
+      <img src="v-over-time-photoresistor.jpg" />
+    </div>
+    <br>
+    <div class="question">
+      <h4>
+        Question 3: AnalogWrite and analogRead are respectively 8-bit and 10-bit values. Imagine you had 10-bit PWM and a 16-bit analog-to-digital converter instead. How would this change your map() code? Explain your answer.
+      </h4>
+      <p>
+        Based on the arduino syntax for the map function, map(value, fromLow, fromHigh, toLow, toHigh), the two values
+        that will change if I used 10-bit and 16-bit values, the "fromLow" and "fromHigh" variables would change to match
+        these new bit values. However, the resulting conversion will remain the same as the original 8-bit and 10-bit values
+        since we are mapping them to the same "toLow" and "toHigh" values for analogWrite.
+      </p>
+    </div>
+
+  </body>
+</html>
