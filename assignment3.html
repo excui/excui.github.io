@@ -33,20 +33,34 @@
         </figcaption>
         <figcaption>
           For the photoresistor, an additional 10k &#937 is used in the voltage divider to limit the amount of current going
-          through the photoresistor so that a change in resistance can be measured. The following calculations below showcase
+          through the resistors. The following calculations below showcase
           what values can be read by the voltage divider using a 10k &#937 resistor:
+        </figcaption>
+        <figcaption>
+          We know that a 10k &#937 resistor is appropriate by showing how the current is being limited
+          in the voltage divider when the photoresistor has a 0 &#937 value:
+        </figcaption>
+        <figcaption>
+          <pre>V(out) = [10k &#937 / (0 &#937 + 10k &#937)] * 5V</pre>
+          <pre>V(out) = (10k &#937 / 10k &#937) * 5V</pre>
+          <pre>V(out) = 5 V</pre>
+          <pre>I = 5 V / 10k &#937 = <u>0.5 mA</u></pre>
+        </figcaption>
+        <figcaption>
+          Using the 10k &#937 resistor, the following calculations below showcase what values can
+          be read by the voltage divider with a variable resistor (photoresistor):
         </figcaption>
         <figcaption>
           If the photoresistor had a 5k &#937 value:
           <pre>V(out) = [10k &#937 / (5k &#937 + 10k &#937)] * 5V</pre>
           <pre>V(out) = (10k &#937 / 15k &#937) * 5V</pre>
-          <pre>V(out) = 3.33 V</pre>
+          <pre><u>V(out) = 3.33 V</u></pre>
         </figcaption>
         <figcaption>
           If the photoresistor had a 2k &#937 value:
           <pre>V(out) = [10k &#937 / (2k &#937 + 10k &#937)] * 5V</pre>
           <pre>V(out) = (10k &#937 / 12k &#937) * 5V</pre>
-          <pre>V(out) = 4.17 V</pre>
+          <pre><u>V(out) = 4.17 V</u></pre>
         </figcaption>
       </figure>
     </div>
