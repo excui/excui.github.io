@@ -31,21 +31,24 @@
           <pre>5V - 1.8V = 3.2 V</pre>
           <pre>3.2V / 220 &#937 = <u>0.0145 A or 14.5 mA</u></pre>
         </figcaption>
+        <br>
         <figcaption>
           For the photoresistor, an additional 10k &#937 is used in the voltage divider to limit the amount of current going
-          through the resistors. The following calculations below showcase
-          what values can be read by the voltage divider using a 10k &#937 resistor:
-        </figcaption>
-        <figcaption>
-          We know that a 10k &#937 resistor is appropriate by showing how the current is being limited
+          through the voltage divider. We know that a 10k &#937 resistor is appropriate by showing how the current is being limited
           in the voltage divider when the photoresistor has a 0 &#937 value:
         </figcaption>
         <figcaption>
-          <pre>V(out) = [10k &#937 / (0 &#937 + 10k &#937)] * 5V</pre>
-          <pre>V(out) = (10k &#937 / 10k &#937) * 5V</pre>
-          <pre>V(out) = 5 V</pre>
-          <pre>I = 5 V / 10k &#937 = <u>0.5 mA</u></pre>
+          <pre>V = I*R, and we know that the total voltage is 5V</pre>
+          <pre>Based on the formula, as R continues to grow smaller, then the current will continue to grow larger,
+            which is not ideal for our circuit.
+          </pre>
+          <pre>Thus, the total resistance of the voltage divider must be a much larger value in order to limit the current
+            in the circuit. We also must take into account when the variable voltage has a value of 0 &#937. Because of this, 
+            the standard constant resistor must be a large value, which is why we use a 10k &#937 resistor.
+          </pre>
+          <pre>I = 5 V / 10k &#937 = <u>0.0005 A or 0.5 mA</u></pre>
         </figcaption>
+        <br>
         <figcaption>
           Using the 10k &#937 resistor, the following calculations below showcase what values can
           be read by the voltage divider with a variable resistor (photoresistor):
