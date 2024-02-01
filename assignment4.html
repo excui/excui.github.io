@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Esther Cui's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Assignment 4: Libraries!</h1>
+    <h3>February 2, 2024</h3>
+    <br>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Schematic</h3>
+      <figure>
+        <img src="a4-schematic.jpg" />
+        <figcaption>
+          This is the schematic for the circuit using an IR receiver, that will read signals from a separate remote, and a
+          servo motor.
+        </figcaption>
+      </figure>
+    </div>
+    <br>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Image</h3>
+      <figure>
+        <img src="a4-image.jpg" />
+        <figcaption>
+          This the circuit from the previous schematic built out on Arduino. The IR receiver and servo motor are both connected to the 
+          breadboard to connect them to power and ground through one wire instead of using multiple. The remote that's used with the 
+          IR receiver is located on the side for outside use.
+        </figcaption>
+      </figure>
+    </div>
+    <hr>
+
+    <div class="a1-code">
+      <h3>Firmware (Code)</h3>
+      <br>
+      <p>
+        I utilized the following sources as references and as a basis for my code for this 
+        assignment:
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=IaXHtcnWh-4&ab_channel=SmartTronics">Control Servo motor With Ir Remote by Smart Tronics</a></li>
+          <li><a href="https://github.com/Arduino-IRremote/Arduino-IRremote/blob/master/README.md">Arduino IRremote Github Repository</a></li>
+        </ul>
+      </p>
+      <br>
+      <p>
+        Though the attached Youtube video showcases code that uses an outdated IRremote library, 
+        I used the basic structure to help me construct my code that follows the newest updates from
+        the most recently updated library. In order to utilize the newer library, I referenced the documentation on the library to help
+        me understand the changes to the most recent version.
+      </p>
+      <br>
+      <pre>
+        <code>
+          // adds the IR remote library to be able to use the remote
+          #include <IRremote.hpp>
+          // adds the Servo library to be able to use the servo motor
+          #include <Servo.h>
+          // sets pin 8 for the IR receiver
+          int remotePin = 8;
+          // creating a new instance of IRrecv to assign it with the correct pin
+          IRrecv irrecv(remotePin);
+          // creates the Servo object as myServo
+          Servo myServo;
+          
+          // runs the following code once to start the rest of the code
+          void setup() {
+            //sets data rate in baud and starts to send in commands
+            Serial.begin(9600);
+            // starts the receiver to begin receiving signals from the remote
+            IrReceiver.begin(remotePin, ENABLE_LED_FEEDBACK);
+            // assigns the Servo object to pin 9
+            myServo.attach(9);
+          }
+          
+          //loop function runs the following actions so long as the appropriate remote buttons are selected
+          void loop() {
+            // if statement to confirm that a signal is sent to the receiver from the remote
+            // if this requirement is fulfilled, then the following lines will print in the serial monitor
+            if (IrReceiver.decode()) {
+              // prints out the raw information into the serial monitor, this includes the commands and
+              // code that is used to identify the buttons on the remote
+              IrReceiver.printIRResultShort(&Serial);
+              // prints out how this data was received by the IR receiver into the serial monitor
+              IrReceiver.printIRSendUsage(&Serial);
+              // allows the receiver to get the next value from the remote
+              IrReceiver.resume();
+            }
+          
+            // The following if statements will allow movement in the servo motor
+            // the command that is mapped in the if statement was found from the previous
+            // if statement that printed out the raw data received by the receiver when
+            // a certain button is pressed on the remote
+          
+            // if statement for when the command from the right button matches 0x9
+            // (which should only map to the upwards arrow)
+            if (IrReceiver.decodedIRData.command == 0x9){
+              // the Servo motor will move to 120 degrees
+              myServo.write(120);
+            }
+            // if statement for when the command from the right button matches 0x7
+            // (which should only map to the downwards arrow)
+            if (IrReceiver.decodedIRData.command == 0x7){
+              // the Servo motor will move to 10 degrees
+              myServo.write(10);
+            }
+          }
+          
+        </code>
+      </pre>
+    </div>
+    <hr>
+
+    <div class="a1">
+      <h3>Circuit Operation</h3>
+      <figure>
+        <img src="a4-operation.gif" />
+        <figcaption>
+          This short clip shows how the Servo motor moves based on the pressed buttons on the remote.
+        </figcaption>
+      </figure>
+    </div>
+    <hr>
+    <br>
+
+    <h2>Additional Questions & Responses</h2>
+    <br>
+    <div class="question">
+      <h4>
+        Question 1: Say you are using a servo motor you attach to pin 9. In your loop() you have the following code:
+        for (int i=0, i<180, i++){servo.write(i); delay(100);}
+        Draw a graph with the X axis in seconds, for two seconds, and the y-axis the voltage at pin 9 with respect to ground.
+      </h4>
+      <img src="v-over-time-servo.jpg" />
+    </div>
+    <br>
+    <div class="question">
+      <h4>
+        Question 2: Your input device is slightly broken, leading it to give us an erroneous reading 1% of the time. How can we address this? Answer in (pseudo)code.
+      </h4>
+      <p>
+        Goal: Eliminate the erroneous, outlier reading if it's over a certain threshold of the average read values
+      </p>
+      <pre>
+        <code>
+          ASSIGN an empty variable
+          FOR running the input device for a short amount of time
+          {
+            ADD the values to an empty variables
+            ASSIGN a new variable that is the average of the calculated sum
+          }
+          FOR as long as the input device is being read and running
+          {
+            ASSIGN the newly read value to a variable
+            IF the variable is over or under 10% of the average
+              {
+                DELETE the errenous value
+              }
+            ELSE {
+              continue to use the value in the output device
+            }
+          }
+        </code>
+      </pre>
+    </div>
+    <br>
+    <div class="question">
+      <h4>
+        Question 3: Your input device is slightly noisy, leading the measurement to randomly deviate from the true measurement up or down by 10%. How can we address this? Answer in (pseudo)code.
+      </h4>
+      <p>
+        Goal: Obtain the average measurement incluing the deviated values to lower the noise made by the input device
+      </p>
+      <pre>
+        <code>
+          ASSIGN three variables with the first 10 values read from the input device
+          ASSIGN a new variable that contains the sum of the 10 variables
+          FOR as long as the input device is running
+          {
+            ASSIGN a new empty variable
+            ASSIGN new variable assuming the value is a random deviation
+            ADD the random devivated value and the sum of the 10 variables into a new value
+            CALCULATE and ASSIGN the average of these 11 total values to an 'average' variable
+            use this average value for the output device 
+          }
+        </code>
+      </pre>
+    </div>
+
+  </body>
+</html>
