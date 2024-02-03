@@ -56,7 +56,8 @@
         Though the attached Youtube video showcases code that uses an outdated IRremote library, 
         I used the basic structure to help me construct my code that follows the newest updates from
         the most recently updated library. In order to utilize the newer library, I referenced the documentation on the library to help
-        me understand the changes to the most recent version.
+        me understand the changes to the most recent version. The changes according to the documentation include much of the
+        setup for the IR remote as well as how the code works to retrieve the correct information from the remote.
       </p>
       <br>
       <pre>
@@ -103,12 +104,16 @@
           
             // if statement for when the command from the right button matches 0x9
             // (which should only map to the upwards arrow)
+            // * I referenced the Youtube video to help me understand how the if statement works *
+            // * I changed the requirements of the statement as well as the output if the requirements are met *
             if (IrReceiver.decodedIRData.command == 0x9){
               // the Servo motor will move to 120 degrees
               myServo.write(120);
             }
             // if statement for when the command from the right button matches 0x7
             // (which should only map to the downwards arrow)
+            // * I referenced the Youtube video to help me understand how the if statement works *
+            // * I changed the requirements of the statement as well as the output if the requirements are met *
             if (IrReceiver.decodedIRData.command == 0x7){
               // the Servo motor will move to 10 degrees
               myServo.write(10);
