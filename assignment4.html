@@ -69,6 +69,7 @@
           // sets pin 8 for the IR receiver
           int remotePin = 8;
           // creating a new instance of IRrecv to assign it with the correct pin
+          // * this is referenced from the original library documentation *
           IRrecv irrecv(remotePin);
           // creates the Servo object as myServo
           Servo myServo;
@@ -78,6 +79,7 @@
             //sets data rate in baud and starts to send in commands
             Serial.begin(9600);
             // starts the receiver to begin receiving signals from the remote
+            // * this is referenced from the original library documentation *
             IrReceiver.begin(remotePin, ENABLE_LED_FEEDBACK);
             // assigns the Servo object to pin 9
             myServo.attach(9);
@@ -87,6 +89,7 @@
           void loop() {
             // if statement to confirm that a signal is sent to the receiver from the remote
             // if this requirement is fulfilled, then the following lines will print in the serial monitor
+            // * this if statement referenced from the original library documentation *
             if (IrReceiver.decode()) {
               // prints out the raw information into the serial monitor, this includes the commands and
               // code that is used to identify the buttons on the remote
