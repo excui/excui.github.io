@@ -25,9 +25,10 @@
           12V power source.
         </figcaption>
         <figcaption>
-          For the transistor, we know from the datasheet that it can handle a maximum of 1 &mu;A. Knowing this, we know
+          For the transistor, we know from the datasheet that it can handle a maximum of 80 A. However, we know
           that our transistor only draws extremely small values of current in order to control a large ammount of voltage being 
-          supplied by our 12V power source.
+          supplied by our 12V power source. The 80 A value is only an absolute maximum, while in reality, our circuit is using much
+          less, probably around 1 &mu;A based on the datasheet's I(DSS) or Zero Gate Voltage Drain Current.
         </figcaption>
       </figure>
     </div>
