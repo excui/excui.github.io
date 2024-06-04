@@ -165,7 +165,10 @@ function Home () {
         <SearchBar inputWord={inputWord} onChange={setinputWord}/>
 
         <SearchDashboard games={games} clickTitle={clickOnGameTitle}/>
-        {showPopUp && <NewReviewPopUp game={chooseTitle} onSave={saveContent} onClose={() => setShowPopUp(false)}/>}
+        {/* For the following Pop-up window flow, I referenced the following documentation to understand how
+            how the pop-up appears and closes: https://www.youtube.com/watch?v=Gy4G68WoHq4.
+            Though for my project, I developed the pop-up as a separate component. */
+        showPopUp && <NewReviewPopUp game={chooseTitle} onSave={saveContent} onClose={() => setShowPopUp(false)}/>}
       </div>
 
 
