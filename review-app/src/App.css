@@ -1,0 +1,133 @@
+.App {
+  padding: 1vw;
+}
+
+header {
+  background-color: white;
+  display: flex;
+  padding: 18px 32px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.reviews-heading {
+  display: flex;
+  flex-direction: row;
+}
+
+.body {
+  height: 100vh;
+  padding: 30px;
+}
+
+/*I'm trying to put the search bar in the center*/
+
+/*.searchResults {
+  display: grid;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: gray;
+}
+
+.thumbnail {
+  align-items: center;
+}*/
+
+.singleReviewEntry {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/*The follwoing styles below are for the pop-up window*/
+.pop-up-background {
+  background-color: gray;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+}
+
+.pop-up-window {
+  background-color: white;
+  width: 60vw;
+  height: 48vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.ReviewEntries {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.login-form {
+  margin: auto;
+  background-color: white;
+  width: 30vw;
+  height: 24vw;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+  margin-top: 2vw;
+}
+
+.logintitle {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.signup-form {
+  margin: auto;
+  background-color: white;
+  width: 30vw;
+  height: 24vw;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+  margin-top: 2vw;
+}
+
+.signuptitle {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
