@@ -1,4 +1,8 @@
-//API KEY: 1e5168ff273b4c759f0a695ede462a07
+/* Aside from a few references that assisted me with writing my code (which I go further into detail
+  below), I also consulted ChatGPT regarding any confusing errors throughout my code that I recieved
+  while trying to run my app. I wanted to understand what could've caused my errors and then apply my 
+  solutions accordingly. This was done a number of times throughout this project's timeline.*/
+  
 import React from 'react';
 import {useState, useEffect} from 'react';
 
