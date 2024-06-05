@@ -1,4 +1,3 @@
-//API KEY: 1e5168ff273b4c759f0a695ede462a07
 import React from 'react';
 import {useState, useEffect} from 'react';
 
