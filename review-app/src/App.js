@@ -1,4 +1,8 @@
-//API KEY: 1e5168ff273b4c759f0a695ede462a07
+/* Aside from a few references that assisted me with writing my code (which I go further into detail
+  below), I also consulted ChatGPT regarding any confusing errors throughout my code that I recieved
+  while trying to run my app. I wanted to understand what could've caused my errors and then apply my 
+  solutions accordingly. This was done a number of times throughout this project's timeline.*/
+
 import React from 'react';
 import {useState, useEffect} from 'react';
 
@@ -87,6 +91,8 @@ function Home () {
           const response = await fetch('https://api.rawg.io/api/games?key=' + api_key + '&search=' + gameNameApi + '&page=1&page_size=80');
           const data = await response.json();
           console.log(data);
+          //Specifically here, for "game.name.toLowerCase . . . inputWord.toLowerCase" was referenced from the documentation provided above.
+          //This line specifically allows the user's input to match the game's title even if there are capital letters in the user's input
           const filteredGames = data.results.filter((game) =>
             game.name && typeof game.name === 'string' && game.name.toLowerCase().includes(inputWord.toLowerCase())
           );
@@ -119,6 +125,9 @@ function Home () {
     }
   };
 
+  /* For this function, I referenced the following firebase documention: https://firebase.google.com/docs/firestore/manage-data/delete-data
+      This documentation allowed me to understand how I can delete data from firebase as I want users
+      to be able to delete their logged reviews from their account. */
   async function deleteReview (id)  {
     try {
       await deleteDoc(doc(db, "loggedReviews", id));
@@ -167,7 +176,10 @@ function Home () {
       </header>
 
       <div className="searchbody">
-        <SearchBar inputWord={inputWord} onChange={setinputWord}/>
+        <SearchBar inputWord={inputWord} 
+        /*For this component, I also referenced the first documentation on creating the search bar to change
+          depending on the user's input*/
+        onChange={setinputWord}/>
 
         <SearchDashboard games={games} clickTitle={clickOnGameTitle}/>
         {/* For the following Pop-up window flow, I referenced the following documentation to understand how
