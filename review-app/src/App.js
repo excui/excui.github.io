@@ -76,7 +76,8 @@ function Home () {
       For the following function getGames, which is used for the search bar functionality, I referenced
       the following online documentation to help me understand and write my code with --> https://geshan.com.np/blog/2022/10/react-search-bar/#:~:text=the%20existing%20components.-,Wire%20up%20React%20search%20bar%20component,-%23
       The documentation assisted me with understanding how to take the data from an API and match
-      a user's input result with the values in the API.
+      a user's input result with the values in the API. Specifically, I referenced the areas that required
+      the "filter" in order for the search bar to produce the correct output.
       */
     async function getGames () {
       if (inputWord) {
